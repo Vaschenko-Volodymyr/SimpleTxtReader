@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class FileChooser extends ListActivity {
 
@@ -51,11 +50,11 @@ public class FileChooser extends ListActivity {
                     else num_item = num_item + " items";
 
                     //String formated = lastModDate.toString();
-                    dir.add(new Item(ff.getName(),num_item,date_modify,ff.getAbsolutePath(),"directory_icon"));
+                    dir.add(new Item(ff.getName(),num_item,date_modify,ff.getAbsolutePath(),"directory_icon", ff.isFile()));
                 }
                 else
                 {
-                    fls.add(new Item(ff.getName(),ff.length() + " Byte", date_modify, ff.getAbsolutePath(),"file_icon"));
+                    fls.add(new Item(ff.getName(),ff.length() + " Byte", date_modify, ff.getAbsolutePath(),"file_icon", ff.isFile()));
                 }
             }
         }catch(Exception e)
@@ -66,7 +65,7 @@ public class FileChooser extends ListActivity {
         Collections.sort(fls);
         dir.addAll(fls);
         if(!f.getName().equalsIgnoreCase("sdcard"))
-            dir.add(0,new Item("..","Parent Directory","",f.getParent(),"directory_up"));
+            dir.add(0,new Item("..","Parent Directory","",f.getParent(),"directory_up", false));
         adapter = new FileArrayAdapter(FileChooser.this,R.layout.list_appearance,dir);
         this.setListAdapter(adapter);
     }
@@ -97,5 +96,9 @@ public class FileChooser extends ListActivity {
             setResult(RESULT_CANCELED, intent);
         }
         finish();
+    }
+
+    public void onBackPressed() {
+        // NOP
     }
 }

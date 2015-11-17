@@ -6,14 +6,19 @@ public class Item implements Comparable<Item>{
     private String date;
     private String path;
     private String image;
+    private boolean isFile;
 
-    public Item(String n,String d, String dt, String p, String img)
+    public Item(String name,String data, String date, String path, String image, boolean isFile)
     {
-        name = n;
-        data = d;
-        date = dt;
-        path = p;
-        image = img;
+        this.name = name;
+        this.data = data;
+        this.date = date;
+        this.path = path;
+        this.image = image;
+        this.isFile = isFile;
+    }
+    public boolean isFile() {
+        return isFile;
     }
     public String getName()
     {

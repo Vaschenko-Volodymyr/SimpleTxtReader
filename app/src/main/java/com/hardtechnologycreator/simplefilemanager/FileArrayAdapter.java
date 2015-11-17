@@ -2,27 +2,30 @@ package com.hardtechnologycreator.simplefilemanager;
 
 import java.util.List;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FileArrayAdapter extends ArrayAdapter<Item>{
 
-    private Context c;
+    private Context context;
     private int id;
-    private List<Item>items;
+    private List<Item> items;
 
     public FileArrayAdapter(Context context, int textViewResourceId,
                             List<Item> objects) {
         super(context, textViewResourceId, objects);
-        c = context;
+        this.context = context;
         id = textViewResourceId;
         items = objects;
+
+
     }
+
     public Item getItem(int i)
     {
         return items.get(i);
@@ -31,7 +34,7 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            LayoutInflater vi = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(id, null);
         }
 
@@ -43,12 +46,15 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
             TextView t1 = (TextView) v.findViewById(R.id.TextView01);
             TextView t2 = (TextView) v.findViewById(R.id.TextView02);
             TextView t3 = (TextView) v.findViewById(R.id.TextViewDate);
-                       /* Take the ImageView from layout and set the city's image */
-            /*ImageView imageCity = (ImageView) v.findViewById(R.id.fd_Icon1);
-            String uri = "drawable/" + o.getImage();
-            int imageResource = c.getResources().getIdentifier(uri, null, c.getPackageName());
-            Drawable image = c.getResources().getDrawable(imageResource);
-            imageCity.setImageDrawable(image);*/
+            ImageView imageCity = (ImageView) v.findViewById(R.id.listImage);
+            try {
+                if (!o.isFile())
+                    imageCity.setImageResource(R.drawable.folder);
+                else
+                    imageCity.setImageResource(R.drawable.file);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Unable to get image from resources" + e, Toast.LENGTH_LONG).show();
+            }
 
             if(t1!=null)
                 t1.setText(o.getName());

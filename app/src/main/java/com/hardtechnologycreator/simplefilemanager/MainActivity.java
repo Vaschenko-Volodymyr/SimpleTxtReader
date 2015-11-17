@@ -31,11 +31,10 @@ import java.io.OutputStreamWriter;
 public class MainActivity extends AppCompatActivity {
 
     private final static int REQUEST_PATH = 1;
+    private final static int REQUEST_FILE_NAME = 2;
     String absoluteFilePath = "";
-
     String filesContent = "";
-    private static final String FILENAME = "Content.txt";
-    FileOutputStream outputStream;
+    private static String filename = "";
 
     TextView tv;
     Button btnClear, btnWrite;
@@ -48,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         tv = (TextView) findViewById(R.id.tvMain);
+
+        Toast.makeText(this, String.valueOf(System.currentTimeMillis()).replaceAll("\\W", ""), Toast.LENGTH_LONG).show();
 
         File fileName;
         String sdState = android.os.Environment.getExternalStorageState();
@@ -123,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 tv.setTextColor(getResources().getColor(R.color.warning));
                 tv.setText(R.string.declaringOpeningNotTxtFiles);
             }
+        } else if (requestCode == REQUEST_FILE_NAME) {
+            if (resultCode == RESULT_OK) {
+                filename = data.getStringExtra("FileName");
+            }
         }
     }
 
@@ -150,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean saveFile() {
-        String fileName = String.valueOf(System.currentTimeMillis()).replaceAll("\\w|\\d", "");
+        String fileName = String.valueOf(System.currentTimeMillis()).replaceAll("\\W", "");
         return saveFile(fileName);
     }
 
@@ -199,7 +204,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_save) {
-            saveFile();
+            Intent intent = new Intent(this, SaveFileActivity.class);
+            startActivityForResult(intent, REQUEST_FILE_NAME);
+
+            if (filename.equals("")) filename = String.valueOf(System.currentTimeMillis()).replaceAll("\\W", "");
+            saveFile(filename);
         }
 
         return super.onOptionsItemSelected(item);
