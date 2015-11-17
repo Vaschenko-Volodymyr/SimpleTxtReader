@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/tvHeaderTextSize"
+        android:gravity="center_horizontal"
+        android:textStyle="bold|italic"
+        android:text="@string/tvHeaderText" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Text"
+        android:layout_below="@+id/tvHeader"/>
+
+    <Button
+        android:id="@+id/btnWriteToFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write to file"
+        android:layout_below="@+id/tvHeader"
+        android:layout_alignParentRight="true"/>
+
+    <ScrollView
+        android:id="@+id/svMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/tvMainTextSize"
+        android:layout_below="@+id/btnClear">
+
+        <TextView
+            android:id="@+id/tvMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:padding="@dimen/tvMainPadding"
+            android:textColor="@color/tvMainColor"
+            android:gravity="center_horizontal"
+            android:text="@string/tvMainText"
+            android:layout_marginBottom="@dimen/tvMainTextSize"
+
+
+            />
+    </ScrollView>
+</RelativeLayout>
