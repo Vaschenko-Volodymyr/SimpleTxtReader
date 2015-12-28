@@ -2,9 +2,9 @@
     <string name="app_name">Simple File Manager 1.0</string>
     <string name="action_settings">Clear</string>
     <string name="action_saveFile">Save text to file</string>
-    <string name="tvHeaderText">Content of .txt files:</string>
-    <string name="tvMainText">\n\n\n.txt files text will be shown here after you pick at least one</string>
-    <string name="declaringOpeningNotTxtFiles">\n\n\nYou should pick .txt file</string>
+    <string name="tvHeaderText">Txt files reader</string>
+    <string name="tvMainText">\n\n.txt files text will be shown here after you pick one</string>
+    <string name="declaringOpeningNotTxtFiles">\n\nYou should pick .txt file</string>
     <string name="saveFileDialogTitle">Save file to...</string>
     <string name="saveFileHeared">Pick a name for file to save, please</string>
     <string name="dialogActivityOk">Save</string>
